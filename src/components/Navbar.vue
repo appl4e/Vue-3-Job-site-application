@@ -2,7 +2,9 @@
   <div
     class="flex justify-between max-w-6xl px-2 py-10 mx-auto border-t-4 border-indigo-500 xl:px-0"
   >
-    <h2 class="text-2xl font-semibold text-indigo-500">JOB Board</h2>
+    <router-link :to="{name: 'home'}">
+      <h2 class="text-2xl font-semibold text-indigo-500">JOB Board</h2>
+    </router-link>
 
     <nav v-if="loggedIn" class="flex gap-4 items-center">
       <a class="text-base" href="#">My posts</a>
@@ -24,7 +26,7 @@
     </nav>
     <nav v-else class="flex gap-4 items-center">
       <a class="text-base" href="#">Login</a>
-      <a class="text-base button" href="#">
+      <router-link class="text-base button" :to="{name: 'registration'}">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5"
@@ -38,7 +40,7 @@
           />
         </svg>
         <span>Join</span>
-      </a>
+      </router-link>
     </nav>
   </div>
 </template>

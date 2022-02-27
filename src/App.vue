@@ -1,7 +1,7 @@
 <template>
   <Layout>
 
-    Hello
+    <router-view></router-view>
   </Layout>
 </template>
 
