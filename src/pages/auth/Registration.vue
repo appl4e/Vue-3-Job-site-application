@@ -40,10 +40,12 @@
   </form>
 </template>
 <script setup>
-import api from "@/helpers/api";
+
 import { reactive, ref } from "vue";
 import Input from "@/components/Form/input.vue"
 import Button from "@/components/Form/Button.vue"
+import useForm from "@/hooks/useForm";
+
 const regFields = reactive({
   "name": "",
   "email": "",
@@ -51,33 +53,10 @@ const regFields = reactive({
   "password_confirmation": ""
 });
 
-const errors = ref([]);
-const loading = ref();
-const handleForm = async () => {
-  loading.value = true
-  const { ok, data, originalError } = await api.post("/api/auth/register", regFields);
+const { submit, getErrors, loading } = useForm();
 
-  if (!ok) {
-    console.log(originalError.response.data);
-    errors.value = originalError.response.data.errors;
-  }
-  else {
-    console.log('success');
-
-  }
-  loading.value = false
-  // try {
-  //   const response = await axios.post("https://jobs-api.return0.codes/api/auth/register", regFields)
-  // }
-  // catch (err) {
-
-  //   console.log(err.response.data)
-
-  // }  loading.value = false
+const handleForm = () => {
+  submit('post', regFields, "api/auth/register");
 };
-
-const getErrors = (key) => {
-  return errors.value[key]?.join(' ') || ""
-}
 
 </script>
