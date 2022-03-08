@@ -2,7 +2,7 @@
   <div
     class="flex justify-between max-w-6xl px-2 py-10 mx-auto border-t-4 border-indigo-500 xl:px-0"
   >
-    <router-link :to="{name: 'home'}">
+    <router-link :to="{ name: 'home' }">
       <h2 class="text-2xl font-semibold text-indigo-500">JOB Board</h2>
     </router-link>
 
@@ -26,7 +26,7 @@
     </nav>
     <nav v-else class="flex gap-4 items-center">
       <a class="text-base" href="#">Login</a>
-      <router-link class="text-base button" :to="{name: 'registration'}">
+      <router-link class="text-base button" :to="{ name: 'auth.registration' }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-5 w-5"

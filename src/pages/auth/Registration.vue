@@ -1,74 +1,83 @@
 <template>
   <form @submit.prevent="handleForm" class="flex flex-col items-start gap-4 p-3 mx-auto md:w-6/12">
     <h1 class="text-xl font-semibold text-slate-700">Register</h1>
-    <div class="flex flex-col w-full">
-      <label for="name">Name</label>
-      <input
-        type="text"
-        name="name"
-        id="name"
-        v-model="regFields.name"
-        class="bg-slate-50 rounded-sm w-full"
-      />
-    </div>
+    <Input
+      v-model="regFields.name"
+      labels="Nameee"
+      name="name"
+      :helperText="getErrors('name')"
+      :hasError="Boolean(getErrors('name'))"
+      class="text-blue-800"
+    />
 
-    <div class="flex flex-col w-full">
-      <label for="name">Email</label>
-      <input
-        type="email"
-        name="email"
-        id="email"
-        v-model="regFields.email"
-        class="bg-slate-50 rounded-sm w-full"
-      />
-    </div>
+    <Input
+      v-model="regFields.email"
+      labels="Email"
+      name="email"
+      :helperText="getErrors('email')"
+      :hasError="Boolean(getErrors('email'))"
+      type="email"
+    />
 
-    <div class="flex flex-col w-full">
-      <label for="name">Password</label>
-      <input
-        type="password"
-        name="password"
-        id="password"
-        v-model="regFields.password"
-        class="bg-slate-50 rounded-sm w-full"
-      />
-    </div>
+    <Input
+      v-model="regFields.password"
+      labels="Password"
+      name="password"
+      :helperText="getErrors('password')"
+      :hasError="Boolean(getErrors('password'))"
+      type="password"
+    />
+    <Input
+      v-model="regFields.password_confirmation"
+      labels="Confirm Password"
+      name="password_confirmation"
+      :helperText="getErrors('password_confirmation')"
+      :hasError="Boolean(getErrors('password_confirmation'))"
+      type="password"
+    />
 
-    <div class="flex flex-col w-full">
-      <label for="password_confirmation">Confirm Password</label>
-      <input
-        type="password"
-        name="password_confirmation"
-        id="password_confirmation"
-        v-model="regFields.confPassword"
-        class="bg-slate-50 rounded-sm w-full"
-      />
-    </div>
-
-    <button class="button">Register</button>
+    <Button :loading="loading">Register</Button>
   </form>
 </template>
 <script setup>
-import { reactive } from "vue"
+import api from "@/helpers/api";
+import { reactive, ref } from "vue";
+import Input from "@/components/Form/input.vue"
+import Button from "@/components/Form/Button.vue"
 const regFields = reactive({
-  name: "",
-  email: "",
-  password: "",
-  confPassword: ""
+  "name": "",
+  "email": "",
+  "password": "",
+  "password_confirmation": ""
 });
 
+const errors = ref([]);
+const loading = ref();
 const handleForm = async () => {
-  await fetch('https://jobs-api.return0.codes/api/auth/register', {
-    method: "POST",
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(regFields)
-  }).then((res) => {
-    console.log(res);
-  }).catch((error) => {
-    console.log(error)
-  });
+  loading.value = true
+  const { ok, data, originalError } = await api.post("/api/auth/register", regFields);
+
+  if (!ok) {
+    console.log(originalError.response.data);
+    errors.value = originalError.response.data.errors;
+  }
+  else {
+    console.log('success');
+
+  }
+  loading.value = false
+  // try {
+  //   const response = await axios.post("https://jobs-api.return0.codes/api/auth/register", regFields)
+  // }
+  // catch (err) {
+
+  //   console.log(err.response.data)
+
+  // }  loading.value = false
+};
+
+const getErrors = (key) => {
+  return errors.value[key]?.join(' ') || ""
 }
 
 </script>
