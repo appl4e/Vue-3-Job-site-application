@@ -41,9 +41,9 @@
 </template>
 <script setup>
 
-import { reactive, ref } from "vue";
-import Input from "@/components/Form/input.vue"
-import Button from "@/components/Form/Button.vue"
+import { reactive } from "vue";
+import Button from "@/components/Form/Button.vue";
+import Input from "@/components/Form/Input.vue";
 import useForm from "@/hooks/useForm";
 import { useRouter } from "vue-router";
 
@@ -60,7 +60,7 @@ const { submit, getErrors, loading } = useForm();
 const handleForm = () => {
   submit('post', regFields, "api/auth/register").then((res)=>{
     alert("success" + res);
-    router.push({name: 'home'});
+    router.push({name: 'auth.login'});
   });
 };
 

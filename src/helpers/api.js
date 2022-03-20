@@ -1,7 +1,7 @@
 import { create } from "apisauce";
 
 const api = create({
-	baseURL: "https://jobs-api.return0.codes",
+	baseURL: import.meta.env.VITE_API_BASE,
 	headers: {
 		"Content-Type": "application/json",
 		Accept: "application/json",

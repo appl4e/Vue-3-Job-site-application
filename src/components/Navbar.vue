@@ -25,7 +25,7 @@
       </a>
     </nav>
     <nav v-else class="flex gap-4 items-center">
-      <a class="text-base" href="#">Login</a>
+      <router-link :to="{name: 'auth.login'}" >Login</router-link>
       <router-link class="text-base button" :to="{ name: 'auth.registration' }">
         <svg
           xmlns="http://www.w3.org/2000/svg"
