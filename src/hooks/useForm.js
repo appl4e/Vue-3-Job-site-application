@@ -5,19 +5,25 @@ const useForm = () => {
 	const loading = ref(false);
 	const errors = ref([]);
 
-	const submit = async (method = "get", fields, endpoint) => {
-		loading.value = true;
+	const submit =  (method = "get", fields, endpoint) => {		
+		return new Promise(async (resolve)=>{
+			errors.value = [];
+			loading.value = true;
+			const { ok, data, originalError } = await api[method](endpoint, fields);
 
-		const { ok, data, originalError } = await api[method](endpoint, fields);
+			if (!ok) {
+				errors.value = originalError.response.data.errors;
+				console.log(errors.value);
+			} else {
+				console.log("success");
+				resolve('success');
+			}
 
-		if (!ok) {
-			errors.value = originalError.response.data.errors;
-			console.log(errors.value);
-		} else {
-			console.log("success");
-		}
+			loading.value = false;
+		});
+		
 
-		loading.value = false;
+		
 		// try {
 		//   const response = await axios.post("https://jobs-api.return0.codes/api/auth/register", regFields)
 		// }

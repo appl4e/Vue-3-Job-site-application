@@ -45,7 +45,9 @@ import { reactive, ref } from "vue";
 import Input from "@/components/Form/input.vue"
 import Button from "@/components/Form/Button.vue"
 import useForm from "@/hooks/useForm";
+import { useRouter } from "vue-router";
 
+const router = useRouter();
 const regFields = reactive({
   "name": "",
   "email": "",
@@ -56,7 +58,10 @@ const regFields = reactive({
 const { submit, getErrors, loading } = useForm();
 
 const handleForm = () => {
-  submit('post', regFields, "api/auth/register");
+  submit('post', regFields, "api/auth/register").then((res)=>{
+    alert("success" + res);
+    router.push({name: 'home'});
+  });
 };
 
 </script>
