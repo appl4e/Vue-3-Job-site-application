@@ -24,6 +24,7 @@
         <span>Post a job</span>
       </a>
       <a class="text-base" href="#">{{auth.user.name}}</a>
+      <router-link class="text-base button" to="" @click="auth.logout">Logout</router-link>
     </nav>
     <nav v-else class="flex gap-4 items-center">
       <router-link :to="{name: 'auth.login'}" >Login</router-link>
