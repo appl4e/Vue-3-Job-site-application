@@ -15,8 +15,8 @@ const useForm = () => {
 				errors.value = originalError.response.data.errors;
 				console.log(errors.value);
 			} else {
-				console.log("success");
-				resolve('success');
+				console.log(data);
+				resolve(data);
 			}
 
 			loading.value = false;

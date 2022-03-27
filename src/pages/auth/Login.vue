@@ -14,8 +14,12 @@ import Input from "@/components/Form/Input.vue";
 import Button from "@/components/Form/Button.vue";
 import useForm from "@/hooks/useForm";
 import { useRouter } from "vue-router";
+import { useAuthStore } from "@/store/auth";
+import api from "@/helpers/api";
 
+const auth = useAuthStore();
 const router = useRouter();
+
 const loginFields = reactive({
     "email": "",
     "password": ""
@@ -24,7 +28,10 @@ const loginFields = reactive({
 const {submit, getErrors, loading} = useForm();
 
 const handleForm = () => {
-    submit('post', loginFields, "api/auth/login").then(()=>{
+    submit('post', loginFields, "api/auth/login").then(async (resolve)=>{
+        localStorage.setItem('token', resolve.token);
+        api.setHeader('Authorization', `Bearer ${resolve.token}`)
+        await auth.boot();
         router.push({name: 'home'});
     })
 }

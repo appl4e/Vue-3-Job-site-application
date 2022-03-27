@@ -6,7 +6,7 @@
       <h2 class="text-2xl font-semibold text-indigo-500">JOB Board</h2>
     </router-link>
 
-    <nav v-if="loggedIn" class="flex gap-4 items-center">
+    <nav v-if="auth.isLoggedin" class="flex gap-4 items-center">
       <a class="text-base" href="#">My posts</a>
       <a class="text-base button" href="#">
         <svg
@@ -23,6 +23,7 @@
         </svg>
         <span>Post a job</span>
       </a>
+      <a class="text-base" href="#">{{auth.user.name}}</a>
     </nav>
     <nav v-else class="flex gap-4 items-center">
       <router-link :to="{name: 'auth.login'}" >Login</router-link>
@@ -46,5 +47,7 @@
 </template>
 
 <script setup>
-let loggedIn = false;
+import { useAuthStore } from '@/store/auth';
+
+const auth = useAuthStore();
 </script>
