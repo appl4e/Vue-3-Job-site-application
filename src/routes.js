@@ -1,11 +1,14 @@
 import Home from "@/pages/Home.vue";
 import Registration from "@/pages/auth/Registration.vue";
 import Login from "@/pages/auth/Login.vue";
+import { createRouter, createWebHistory } from "vue-router";
+import { useAuthStore } from "./store/auth";
 const routes = [
 	{
 		name: "home",
 		path: "/",
 		component: Home,
+		meta: { auth: true },
 	},
 	{
 		name: "auth.registration",
@@ -19,4 +22,17 @@ const routes = [
 	},
 ];
 
-export default routes;
+const router = createRouter({
+	history: createWebHistory(),
+	routes,
+});
+
+router.beforeEach((to, from, next) => {
+	const auth = useAuthStore();
+
+	if (to?.meta?.auth && !auth.isLoggedin) next("/login");
+
+	next();
+});
+
+export default router;
