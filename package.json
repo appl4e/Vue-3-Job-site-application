@@ -12,6 +12,7 @@
     "axios": "^0.26.0",
     "pinia": "^2.0.12",
     "vue": "^3.2.25",
+    "vue-loading-overlay": "^5.0.3",
     "vue-router": "^4.0.12"
   },
   "devDependencies": {

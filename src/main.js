@@ -4,6 +4,7 @@ import './assets/index.css'
 import router from "./routes";
 import { createPinia } from "pinia";
 import { useAuthStore } from "./store/auth";
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 const app = createApp(App);
 

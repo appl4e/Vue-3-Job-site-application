@@ -32,7 +32,8 @@ router.beforeEach((to, from, next) => {
 
 	if (to?.meta?.auth && !auth.isLoggedin) next("/login");
 
-	next();
+	else next();
+	
 });
 
 export default router;
