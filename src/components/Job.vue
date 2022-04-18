@@ -45,7 +45,7 @@
         </div>
       </div>
 
-      <div class="w-full mb-2 md:w-4/12">
+      <div class="w-full mb-2 md:w-4/12" v-if="job.tags.length" >
         <router-link
           :to="tag.slug"
           v-for="tag in job?.tags" :key="tag.id"
