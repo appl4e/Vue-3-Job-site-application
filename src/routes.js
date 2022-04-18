@@ -1,4 +1,5 @@
 import Home from "@/pages/Home.vue";
+import JobsByTag from '@/pages/JobsByTag.vue'
 import Registration from "@/pages/auth/Registration.vue";
 import Login from "@/pages/auth/Login.vue";
 import { createRouter, createWebHistory } from "vue-router";
@@ -8,6 +9,12 @@ const routes = [
 		name: "home",
 		path: "/",
 		component: Home,
+		meta: { auth: true },
+	},
+	{
+		name: "JobByTag",
+		path: "/tags/:slug",
+		component: JobsByTag,
 		meta: { auth: true },
 	},
 	{

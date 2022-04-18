@@ -47,7 +47,7 @@
 
       <div class="w-full mb-2 md:w-4/12" v-if="job.tags.length" >
         <router-link
-          :to="tag.slug"
+          :to="'/tags/'+tag.slug"
           v-for="tag in job?.tags" :key="tag.id"
           class="inline-block px-3 py-1 mr-2 text-gray-600 bg-white border-2 border-gray-300 rounded-lg"
         >
