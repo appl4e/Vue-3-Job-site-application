@@ -23,8 +23,3 @@ auth.boot().then(() => {
 		app.mount("#app");
 	});
 });
-
-
-
-
-
