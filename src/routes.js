@@ -12,6 +12,11 @@ const routes = [
 		meta: { auth: true },
 	},
 	{
+		name: "JobDetails",
+		path: "/:slug",
+		component: () => import("@/pages/JobDetails.vue"),
+	},
+	{
 		name: "JobByTag",
 		path: "/tags/:slug",
 		component: JobsByTag,

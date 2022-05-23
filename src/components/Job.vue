@@ -4,7 +4,7 @@
     :class="{ 'bg-blue-200': false }"
   >
     <img
-      :src="job.company.logo"
+      :src="job.company?.logo"
       class="w-12 h-12 mr-4"
     />
 
@@ -59,7 +59,7 @@
         <slot name="action">
           <div class="flex gap-2 transition-opacity duration-200 opacity-100">
             <router-link
-              :to="job.slug"
+              :to="job.slug" v-if="showDetails"
               class="inline-block px-3 py-2 font-bold text-indigo-400 bg-white border-2 border-indigo-400 rounded-lg hover:text-opacity-80"
             >
               Details
@@ -82,6 +82,10 @@
     job: {
       type: Object,
       required: true
+    },
+    showDetails: {
+      type: Boolean,
+      default: true
     }
   });
 
